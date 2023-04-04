@@ -16,13 +16,18 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 urls = {source = "https://github.com/asungy/cowsim"}
-dependencies = []
+dependencies = [
+    "click",
+]
 [project.optional-dependencies]
 dev = [
     "black",
     "pyflakes",
+    "pyinstaller",
     "pytest",
 ]
+[project.scripts]
+cowsim = "cowsim.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["source"]
