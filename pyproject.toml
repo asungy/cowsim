@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cowsim"
+version = "0.1.0"
+description = "A basic cow pen simulator."
+readme = "README.md"
+requires-python = ">=3.10.0"
+maintainers = [
+    {name = "Alexander Sung", email = "aleksungis@gmail.com"},
+]
+keywords = ["Cow", "Simulation"]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+]
+urls = {source = "https://github.com/asungy/cowsim"}
+dependencies = []
+[project.optional-dependencies]
+dev = [
+    "black",
+    "pyflakes",
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["source"]
+namespaces = false
+
+# pytest configuration options:
+# https://pytest.org/en/7.1.x/reference/reference.html#configuration-options
+[tool.pytest.ini_options]
+minversion = "7.1"
+addopts = [
+    "-ra",
+    "-q",
+    "--strict-markers",
+]
+python_classes = [
+    "*Test",
+]
+python_files = [
+    "*_test.py",
+]
+python_functions = [
+    "test_*",
+]
+pythonpath = [
+    "source",
+]
+testpaths = [
+    "tests/cowsim"
+]
+markers = [
+    "slow: mark a test as slow",
+]
+required_plugins = []
+xfail_strict = true

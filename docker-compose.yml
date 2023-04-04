@@ -1,0 +1,83 @@
+services:
+  # Service to create interactive TTY development environment.
+  dev:
+    profiles: ["dev"]
+    build:
+      context: .
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt/cowsim
+    working_dir: /mnt/cowsim
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+  # Service to build distributable cowsim package.
+  dist:
+    profiles: ["dist"]
+    build:
+      context: .
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt/cowsim
+    working_dir: /mnt/cowsim
+    command: >
+      sh -c "python3 -m build --wheel --outdir=./build"
+
+  # Service to run pytest.
+  test:
+    profiles: ["code_quality"]
+    build:
+      context: .
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt/cowsim
+    working_dir: /mnt/cowsim
+    command: >
+      sh -c "pip install --no-build-isolation .[dev] &&
+             python3 -m pytest"
+
+  # Service to run format checker on Python files.
+  format_check:
+    profiles: ["code_quality"]
+    build:
+      context: .
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt/cowsim
+    working_dir: /mnt/cowsim
+    command: >
+      sh -c "pip install --upgrade black &&
+             python3 -m black --check ."
+
+  # Service to run formatter.
+  format:
+    profiles: ["code_quality"]
+    build:
+      context: .
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt/cowsim
+    working_dir: /mnt/cowsim
+    command: >
+      sh -c "pip install --upgrade black &&
+             python3 -m black ."
+
+  # Service to run linter.
+  lint:
+    profiles: ["code_quality"]
+    build:
+      context: .
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt/cowsim
+    working_dir: /mnt/cowsim
+    command: >
+      sh -c "pip install --upgrade pyflakes &&
+             python3 -m pyflakes ."
