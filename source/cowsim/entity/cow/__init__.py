@@ -1,16 +1,49 @@
-from ..entity import Entity
-import uuid
+from .. import Entity
+from abc import abstractmethod
+from enum import Enum
+
+
+class Emotion(Enum):
+    """Enumeration class for discerning emotional characteristics of cow."""
+    CONFUSED    = 0
+    CONTENT     = 1
+    CURIOUS     = 2
+    JOYFUL      = 3
+    MELANCHOLIC = 4
+    UPSET       = 5
+
+
+class CauseOfDeath(Enum):
+    """Enumeration class for identifying why a cow died."""
+    NOT_DEAD = 1
+    OLD_AGE = 2
+    MALNOURISHED = 3
+    OVERWEIGHT = 4
 
 
 class Cow(Entity):
-    def __init__(self, age):
-        self._age = age
-        self._id = uuid.uuid4()
+    @classmethod
+    @abstractmethod
+    def generate(cls) -> "Cow":
+        """Randomly generate an instance of a Cow."""
+        ...
 
-    @property
-    def id(self):
-        return self._id
+    # @abstractmethod
+    def milk_production(self) -> float:
+        ...
 
-    @property
-    def age(self):
-        return self._age
+    # @abstractmethod
+    def methane_production(self) -> float:
+        ...
+
+    # @abstractmethod
+    def feed_requirement(self) -> float:
+        ...
+
+    # @abstractmethod
+    def emotion(self) -> Emotion:
+        ...
+
+    # @abstractmethod
+    def talk(self) -> str:
+        ...

@@ -11,6 +11,6 @@ class Environment(ABC):
         ...
 
     @abstractmethod
-    def initialize_entity(self, entity_class: Entity, count: int) -> None:
+    def add_entity(self, entity_class: Entity, count: int) -> None:
         """Initialize Entity class with a given count."""
         ...

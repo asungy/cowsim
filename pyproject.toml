@@ -18,12 +18,13 @@ classifiers = [
 urls = {source = "https://github.com/asungy/cowsim"}
 dependencies = [
     "click",
+    "colorama",
+    "numpy",
 ]
 [project.optional-dependencies]
 dev = [
     "black",
     "pyflakes",
-    "pyinstaller",
     "pytest",
 ]
 [project.scripts]
