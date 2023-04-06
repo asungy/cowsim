@@ -1,11 +1,12 @@
-from cowsim.entity.cow.purple_angus import \
-    MAX_AGE, \
-    MAX_CALORIC_BOUND, \
-    MAX_WEIGHT, \
-    MIN_AGE, \
-    MIN_CALORIC_BOUND, \
-    MIN_WEIGHT, \
-    PurpleAngus
+from cowsim.entity.cow.purple_angus import (
+    MAX_AGE,
+    MAX_CALORIC_BOUND,
+    MAX_WEIGHT,
+    MIN_AGE,
+    MIN_CALORIC_BOUND,
+    MIN_WEIGHT,
+    PurpleAngus,
+)
 from cowsim.entity import Sex
 from cowsim.entity.cow import CauseOfDeath
 
@@ -40,11 +41,14 @@ class PurpleAngusTest:
         for _ in range(1000):
             p_angus = PurpleAngus.generate()
             assert p_angus.age >= MIN_AGE and p_angus.age <= MAX_AGE
-            assert p_angus.calories >= MIN_CALORIC_BOUND and p_angus.calories <= MAX_CALORIC_BOUND
+            assert (
+                p_angus.calories >= MIN_CALORIC_BOUND
+                and p_angus.calories <= MAX_CALORIC_BOUND
+            )
             assert p_angus.weight >= MIN_WEIGHT and p_angus.weight <= MAX_WEIGHT
 
     def test_should_perish(self):
-        """ Test PurpleAngus.should_perish() method."""
+        """Test PurpleAngus.should_perish() method."""
         ok_angus = PurpleAngus(
             age=(MAX_AGE + MIN_AGE) / 2,
             sex=Sex.FEMALE,
@@ -90,4 +94,3 @@ class PurpleAngusTest:
                 assert angus.weight < old_weight
             else:
                 assert angus.weight == old_weight
-

@@ -5,6 +5,7 @@ import uuid
 
 class Sex(Enum):
     """Enumeration class for discerning sex of entity."""
+
     MALE = 1
     FEMALE = 2
 

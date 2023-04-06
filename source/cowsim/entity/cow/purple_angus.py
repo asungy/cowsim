@@ -117,8 +117,12 @@ class PurpleAngus(Cow):
 
         # Modify weight proportional to caloric difference from bounds.
         if self.calories < MIN_CALORIC_BOUND:
-            self._weight -= self.weight * (MIN_CALORIC_BOUND - self.calories) / MIN_CALORIC_BOUND
+            self._weight -= (
+                self.weight * (MIN_CALORIC_BOUND - self.calories) / MIN_CALORIC_BOUND
+            )
         elif self.calories > MAX_CALORIC_BOUND:
-            self._weight += self.weight * (self.calories - MAX_CALORIC_BOUND) / MAX_CALORIC_BOUND
+            self._weight += (
+                self.weight * (self.calories - MAX_CALORIC_BOUND) / MAX_CALORIC_BOUND
+            )
 
         return expended_kcal

@@ -5,16 +5,18 @@ from enum import Enum
 
 class Emotion(Enum):
     """Enumeration class for discerning emotional characteristics of cow."""
-    CONFUSED    = 0
-    CONTENT     = 1
-    CURIOUS     = 2
-    JOYFUL      = 3
+
+    CONFUSED = 0
+    CONTENT = 1
+    CURIOUS = 2
+    JOYFUL = 3
     MELANCHOLIC = 4
-    UPSET       = 5
+    UPSET = 5
 
 
 class CauseOfDeath(Enum):
     """Enumeration class for identifying why a cow died."""
+
     NOT_DEAD = 1
     OLD_AGE = 2
     MALNOURISHED = 3
