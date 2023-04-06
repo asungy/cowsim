@@ -70,7 +70,8 @@ class Entity(ABC):
 
     @abstractmethod
     def cause_of_death(self) -> Enum:
-        """Determines the reason an entity has perished (if applicable).
+        """Returns an enumerated class indicating the cause of death of an
+        entity (if applicable).
 
         Parameters
         ----------
@@ -79,7 +80,7 @@ class Entity(ABC):
         Returns
         -------
         Enum
-            An enumeration class denoting cause of death (if any).
+            Instance of enumerated class.
         """
         ...
 

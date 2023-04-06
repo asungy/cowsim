@@ -27,11 +27,32 @@ class Cow(Entity):
     @classmethod
     @abstractmethod
     def generate(cls) -> "Cow":
-        """Randomly generate an instance of a Cow."""
+        """Randomly generate an instance of a cow.
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        Cow
+            A randomly generated Cow.
+        """
         ...
 
-    # @abstractmethod
+    @abstractmethod
     def milk_production(self) -> float:
+        """Calculates milk produced from cow.
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        float
+            Milk produced (in liters).
+        """
         ...
 
     # @abstractmethod
