@@ -33,6 +33,10 @@ class Entity(ABC):
     def name() -> str:
         """Name of entity.
 
+        Parameters
+        ----------
+        none
+
         Returns
         -------
         str
@@ -68,6 +72,10 @@ class Entity(ABC):
     def cause_of_death(self) -> Enum:
         """Determines the reason an entity has perished (if applicable).
 
+        Parameters
+        ----------
+        none
+
         Returns
         -------
         Enum
@@ -78,6 +86,13 @@ class Entity(ABC):
     @abstractmethod
     def expend_calories(self) -> float:
         """Calculates and expends entity's calories.
+
+        If the calculated caloric expenditure falls below some minimum caloric
+        bound, then it will cause the entity to lose weight.
+
+        Parameters
+        ----------
+        none
 
         Returns
         -------
@@ -90,16 +105,27 @@ class Entity(ABC):
         """
         ...
 
-    # @abstractmethod
+    @abstractmethod
     def caloric_intake(self, kcal: float) -> float:
-        ...
+        """Causes entity to ingest specified calorie.
 
-    # @abstractmethod
-    def tick(self) -> None:
+        If the specified caloric intake is above some maximum caloric bound,
+        then it will cause the entity to gain weight.
+
+        Parameters
+        ----------
+        kcal : float
+            Calories to be ingested
+
+        Returns
+        -------
+        float
+            Caloric increase of entity
+        """
         ...
 
     def __init__(self, age: int, sex: Sex, calories: int, weight: int):
-        """Organism class constructor."""
+        """Entity class constructor."""
         assert age is not None
         assert sex is not None
         assert calories is not None
