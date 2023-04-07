@@ -28,6 +28,22 @@ class Entity(ABC):
         The current weight of the entity (in kilograms).
     """
 
+    @classmethod
+    @abstractmethod
+    def generate(cls) -> "Entity":
+        """Randomly generate an instance of a cow.
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        Entity
+            A randomly generated Entity.
+        """
+        ...
+
     @staticmethod
     @abstractmethod
     def name() -> str:
@@ -125,8 +141,28 @@ class Entity(ABC):
         """
         ...
 
-    def __init__(self, age: int, sex: Sex, calories: int, weight: int):
-        """Entity class constructor."""
+    def __init__(self, age: int, sex: Sex, calories: float, weight: float):
+        """Entity class constructor.
+
+        Parameters
+        ----------
+        age : int
+            The age of the entity.
+
+        sex : Sex
+            The sex of the entity.
+
+        calories : float
+            The initial caloric levels of the entity.
+
+        weight : float
+            The initial weight of the entity.
+
+        Raises
+        ------
+        AssertionError
+            If any of the arguments are None.
+        """
         assert age is not None
         assert sex is not None
         assert calories is not None
@@ -141,20 +177,25 @@ class Entity(ABC):
 
     @property
     def id(self) -> uuid.UUID:
+        """Unique identifier for entity."""
         return self._id
 
     @property
     def age(self) -> int:
+        """Age of entity."""
         return self._age
 
     @property
     def sex(self) -> Sex:
+        """Sex of entity."""
         return self._sex
 
     @property
     def calories(self) -> float:
+        """Caloric levels of entity."""
         return self._calories
 
     @property
     def weight(self) -> float:
+        """Weight of entity."""
         return self._weight

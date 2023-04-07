@@ -1,4 +1,5 @@
 import click
+from .run import run
 
 
 @click.group()
@@ -9,4 +10,5 @@ def root():
 
 
 def main():
+    root.add_command(run)
     root()

@@ -20,6 +20,7 @@ dependencies = [
     "click",
     "colorama",
     "numpy",
+    "pandas",
 ]
 [project.optional-dependencies]
 dev = [

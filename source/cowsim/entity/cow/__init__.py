@@ -9,9 +9,10 @@ class Emotion(Enum):
     CONFUSED = 0
     CONTENT = 1
     CURIOUS = 2
-    JOYFUL = 3
-    MELANCHOLIC = 4
-    UPSET = 5
+    HAPPY = 3
+    JOYFUL = 4
+    MELANCHOLIC = 5
+    UPSET = 6
 
 
 class CauseOfDeath(Enum):
@@ -24,22 +25,6 @@ class CauseOfDeath(Enum):
 
 
 class Cow(Entity):
-    @classmethod
-    @abstractmethod
-    def generate(cls) -> "Cow":
-        """Randomly generate an instance of a cow.
-
-        Parameters
-        ----------
-        none
-
-        Returns
-        -------
-        Cow
-            A randomly generated Cow.
-        """
-        ...
-
     @abstractmethod
     def milk_production(self) -> float:
         """Calculates milk produced from cow.
@@ -55,18 +40,32 @@ class Cow(Entity):
         """
         ...
 
-    # @abstractmethod
+    @abstractmethod
     def methane_production(self) -> float:
+        """Calculate methane production from cow.
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        float
+            Methane produced (in kilograms).
+        """
         ...
 
-    # @abstractmethod
-    def feed_requirement(self) -> float:
-        ...
-
-    # @abstractmethod
+    @property
+    @abstractmethod
     def emotion(self) -> Emotion:
-        ...
+        """Returns the current emotion of cow.
 
-    # @abstractmethod
-    def talk(self) -> str:
+        Parameters
+        ----------
+
+        Returns
+        -------
+        Emotion
+            The emotion describing the cow's internal state.
+        """
         ...

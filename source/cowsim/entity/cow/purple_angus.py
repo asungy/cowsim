@@ -1,4 +1,4 @@
-from ..cow import Cow, CauseOfDeath
+from ..cow import Cow, CauseOfDeath, Emotion
 from cowsim.entity import Sex
 from enum import Enum
 import numpy as np
@@ -7,7 +7,7 @@ import random
 
 class PurpleAngus(Cow):
     # Age range (in days)
-    MIN_AGE = 0
+    MIN_AGE = 1
     MAX_AGE = 25 * 365
 
     # Adult age (in days)
@@ -26,6 +26,9 @@ class PurpleAngus(Cow):
 
     # Average milk production (in liters)
     AVERAGE_MILK_PRODUCTION = 60
+
+    # Max bound on methane production (in kilograms)
+    MAX_METHANE_PRODUCTION_BOUND = 300 * 2.2
 
     @staticmethod
     def name() -> str:
@@ -140,7 +143,7 @@ class PurpleAngus(Cow):
         mu = mu * 0.2
         sigma = mu / 3
         normal = np.random.normal(mu, sigma, PurpleAngus.MAX_AGE)
-        expended_kcal += max(normal[self.age], 0)
+        expended_kcal += max(normal[self.age - 1], 0)
 
         # Ensure that self.calories is not negative.
         self._calories = max(0, self.calories - expended_kcal)
@@ -218,9 +221,36 @@ class PurpleAngus(Cow):
         mu = PurpleAngus.AVERAGE_MILK_PRODUCTION
         sigma = mu / 3
         normal = np.random.normal(mu, sigma, PurpleAngus.MAX_AGE)
-        milk_production = max(normal[self.age], 0)
+        milk_production = max(normal[self.age - 1], 0)
 
         # Milk production is proportionally related to weight.
         milk_production *= 1 + (self.weight / PurpleAngus.MAX_WEIGHT)
 
         return max(milk_production, 0)
+
+    def methane_production(self) -> float:
+        """Calculate methane production from cow.
+
+        Methane production is calculated based on calories.
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        float
+            Methane produced (in kilograms).
+
+        Notes
+        -----
+        - Methane production is proportional to calories.
+        """
+        return PurpleAngus.MAX_METHANE_PRODUCTION_BOUND * (
+            self.calories / PurpleAngus.MAX_CALORIC_BOUND
+        )
+
+    @property
+    def emotion(self) -> Emotion:
+        i = random.randint(0, len(list(Emotion)))
+        return list(Emotion)[i]

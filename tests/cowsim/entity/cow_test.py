@@ -1,6 +1,6 @@
 from cowsim.entity.cow.purple_angus import PurpleAngus
 from cowsim.entity import Sex
-from cowsim.entity.cow import CauseOfDeath
+from cowsim.entity.cow import CauseOfDeath, Emotion
 import random
 
 
@@ -124,3 +124,7 @@ class PurpleAngusTest:
         gaingus.caloric_intake(random.randint(1, 100))
         assert gaingus.weight > old_weight
         assert gaingus.calories == PurpleAngus.MAX_CALORIC_BOUND
+
+    def test_emotion(self):
+        angus = PurpleAngus.generate()
+        assert isinstance(angus.emotion, Emotion)
