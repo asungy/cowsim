@@ -9,10 +9,12 @@ class Emotion(Enum):
     CONFUSED = 0
     CONTENT = 1
     CURIOUS = 2
-    HAPPY = 3
-    JOYFUL = 4
-    MELANCHOLIC = 5
-    UPSET = 6
+    JOYFUL = 3
+    MELANCHOLIC = 4
+    SCARED = 5
+    STRESSED = 6
+    TIRED = 7
+    UPSET = 8
 
 
 class CauseOfDeath(Enum):
