@@ -6,15 +6,76 @@ from enum import Enum
 class Emotion(Enum):
     """Enumeration class for discerning emotional characteristics of cow."""
 
-    CONFUSED = 0
-    CONTENT = 1
-    CURIOUS = 2
-    JOYFUL = 3
+    CONTENT = 0
+    HAPPY = 1
+    EXCITED = 2
+    CURIOUS = 3
     MELANCHOLIC = 4
-    SCARED = 5
-    STRESSED = 6
-    TIRED = 7
-    UPSET = 8
+    NOSTALGIC = 5
+    TIRED = 6
+    UPSET = 7
+    SCARED = 8
+    STRESSED = 9
+
+    @classmethod
+    def is_positive(cls, emotion: "Emotion") -> bool:
+        """Determines if emotion is classfied as positive.
+
+        Parameters
+        ----------
+        emotion : Emotion
+            Emotion in question.
+
+        Returns
+        -------
+        bool
+            True, if the emotion is classified as positive.
+        """
+        match emotion:
+            case cls.CONTENT | cls.HAPPY | cls.EXCITED:
+                return True
+            case _:
+                return False
+
+    @classmethod
+    def is_neutral(cls, emotion: "Emotion") -> bool:
+        """Determines if emotion is classfied as neutral.
+
+        Parameters
+        ----------
+        emotion : Emotion
+            Emotion in question.
+
+        Returns
+        -------
+        bool
+            True, if the emotion is classified as neutral.
+        """
+        match emotion:
+            case cls.CURIOUS | cls.MELANCHOLIC | cls.NOSTALGIC:
+                return True
+            case _:
+                return False
+
+    @classmethod
+    def is_negative(cls, emotion: "Emotion") -> bool:
+        """Determines if emotion is classfied as negative.
+
+        Parameters
+        ----------
+        emotion : Emotion
+            Emotion in question.
+
+        Returns
+        -------
+        bool
+            True, if the emotion is classified as negative.
+        """
+        match emotion:
+            case cls.TIRED | cls.UPSET | cls.SCARED | cls.STRESSED:
+                return True
+            case _:
+                return False
 
 
 class CauseOfDeath(Enum):

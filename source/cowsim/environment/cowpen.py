@@ -1,5 +1,5 @@
 from ..entity.cow import Cow
-from ..environment import Environment
+from ..environment import Environment, Food
 
 
 class Cowpen(Environment):
@@ -16,6 +16,8 @@ class Cowpen(Environment):
         The maximum population size that the environment can hold.
     """
 
+    DEFAULT_MAX_SIZE = 100
+
     @staticmethod
     def name() -> str:
         """Name of environment.
@@ -31,7 +33,7 @@ class Cowpen(Environment):
         """
         return "Cowpen"
 
-    def __init__(self, entities: [(Cow, int)], max_size: int):
+    def __init__(self, entities: [(Cow, int)], max_size: int = DEFAULT_MAX_SIZE):
         """Constructor for Environment and derived classes.
 
         Parameters
@@ -40,6 +42,8 @@ class Cowpen(Environment):
             A list of tuples that describe the cows and quantities that
             will inhabit the environment.
 
+        max_size : int
+            The maximum population size that the environment can hold.
         Raises
         ------
         RuntimeError
@@ -75,11 +79,11 @@ class Cowpen(Environment):
         """
         pass
 
-    def _reproduction_phase(self) -> None:
+    def _feeding_phase(self) -> None:
         """ """
         pass
 
-    def _feeding_phase(self) -> None:
+    def _reproduction_phase(self) -> None:
         """ """
         pass
 
@@ -97,4 +101,23 @@ class Cowpen(Environment):
 
     def _methane_production_phase(self) -> None:
         """ """
+        pass
+
+
+class OrangeGrass:
+    """
+
+    """
+
+    CALORIES_PER_SERVING = 7000
+    PRICE_PER_SERVING = 10.00
+
+    def __init__(self, servings: int):
+        pass
+
+    @property
+    def price(self) -> float:
+        """
+
+        """
         pass

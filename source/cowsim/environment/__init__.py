@@ -73,3 +73,44 @@ class Environment(ABC):
         None
         """
         ...
+
+
+class Food(ABC):
+    """Abstract class for food.
+
+    Attributes
+    ----------
+
+    """
+
+    @staticmethod
+    @abstractmethod
+    def name() -> str:
+        """Name of environment.
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        str
+            A name identifying this class.
+        """
+        ...
+
+    @property
+    @abstractmethod
+    def calories(self) -> float:
+        """Number of calories (kcal) contained in this Food object.
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        float
+            Number of (kilo)calories.
+        """
+        ...

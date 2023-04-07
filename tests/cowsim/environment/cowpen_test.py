@@ -9,3 +9,7 @@ class CowpenTest:
         environment = Cowpen([(PurpleAngus, quantity)])
         assert PurpleAngus.name() in environment._entities
         assert len(environment._entities[PurpleAngus.name()]) == quantity
+
+    def test_feeding_phase(self):
+        """Test the feeding phase."""
+        
