@@ -31,7 +31,7 @@ class Entity(ABC):
     @classmethod
     @abstractmethod
     def generate(cls) -> "Entity":
-        """Randomly generate an instance of a cow.
+        """Randomly generate an instance of a entity.
 
         Parameters
         ----------
@@ -41,6 +41,22 @@ class Entity(ABC):
         -------
         Entity
             A randomly generated Entity.
+        """
+        ...
+
+    @classmethod
+    @abstractmethod
+    def newborn(cls) -> "Entity":
+        """Generates a newborn entity (when two entities reproduce).
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        Entity
+            A newborn entity.
         """
         ...
 
@@ -60,17 +76,17 @@ class Entity(ABC):
         """
         ...
 
-    # @classmethod
-    # @abstractmethod
-    def should_reproduce(cls, entity1: "Entity", entity2: "Entity") -> bool:
+    @classmethod
+    @abstractmethod
+    def should_reproduce(cls, entity_a: "Entity", entity_b: "Entity") -> bool:
         """Determines if two entities should reproduce.
 
         Parameters
         ----------
-        entity1 : Entity
+        entity_a : Entity
             An arbitrary Entity instance
 
-        entity2 : Entity
+        entity_b : Entity
             An arbitrary Entity instance
 
         Returns
@@ -80,7 +96,7 @@ class Entity(ABC):
 
         Notes
         -----
-        `entity1` and `entity2` cannot be identical.
+        `entity_a` and `entity_b` cannot be identical.
         """
         ...
 
@@ -175,6 +191,9 @@ class Entity(ABC):
         self._calories = calories
         self._weight = weight
 
+    def __str__(self):
+        return f"{self.__class__.name()} [{str(self._id)[:8]}]"
+
     @property
     def id(self) -> uuid.UUID:
         """Unique identifier for entity."""
@@ -199,3 +218,16 @@ class Entity(ABC):
     def weight(self) -> float:
         """Weight of entity."""
         return self._weight
+
+    def increment_age(self) -> None:
+        """Increment age.
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        None
+        """
+        self._age += 1

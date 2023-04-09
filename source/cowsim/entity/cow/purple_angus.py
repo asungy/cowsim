@@ -46,6 +46,91 @@ class PurpleAngus(Cow):
         return "Purple Angus"
 
     @classmethod
+    def should_reproduce(cls, cow_a: Cow, cow_b: Cow) -> bool:
+        """Determines if two cows should reproduce.
+
+        The probability of two cows reproducing (given that certain conditions
+        are met) is based on both of the cows' emotional states.
+
+        Parameters
+        ----------
+        cow_a : Cow
+            An arbitrary Cow instance
+
+        cow_b : Cow
+            An arbitrary Cow instance
+
+        Returns
+        -------
+        bool
+            True, if entities should reproduce.
+
+        Notes
+        -----
+        - `cow_a` and `cow_b` cannot be identical.
+        - Both cows must be over the adult age.
+        - Cows must be over the opposite sex to reproduce.
+        """
+        if type(cow_a) != type(cow_b):
+            return False
+
+        if cow_a.age < cls.ADULT_AGE or cow_b.age < cls.ADULT_AGE:
+            return False
+
+        if cow_a.id == cow_b.id:
+            return False
+
+        if cow_a.sex == cow_b.sex:
+            return False
+
+        prob_a = None
+        if Emotion.is_positive(cow_a.emotion):
+            prob_a = 1.0
+        elif Emotion.is_neutral(cow_a.emotion):
+            prob_a = 0.66
+        else:
+            prob_a = 0.33
+
+        prob_b = None
+        if Emotion.is_positive(cow_b.emotion):
+            prob_b = 1.0
+        elif Emotion.is_neutral(cow_b.emotion):
+            prob_b = 0.66
+        else:
+            prob_b = 0.33
+
+        prob = prob_a * prob_b
+
+        return random.uniform(0, 1) <= prob
+
+    @classmethod
+    def newborn(cls) -> "PurpleAngus":
+        """Generates a newborn purple angus (when two purple angus reproduce).
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        PurpleAngus
+            A newborn purple angus.
+        """
+        age = 0
+        sex = Sex.FEMALE
+        if random.randint(0, 1) == 0:
+            sex = Sex.MALE
+        calories = random.uniform(cls.MIN_CALORIC_BOUND, cls.MAX_CALORIC_BOUND)
+        weight = random.uniform(cls.MIN_WEIGHT, cls.MAX_WEIGHT)
+
+        return cls(
+            age=age,
+            sex=sex,
+            calories=calories,
+            weight=weight,
+        )
+
+    @classmethod
     def generate(cls) -> "PurpleAngus":
         """Randomly generate an instance of a PurpleAngus.
 
@@ -252,5 +337,13 @@ class PurpleAngus(Cow):
 
     @property
     def emotion(self) -> Emotion:
-        i = random.randint(0, len(list(Emotion)))
+        """The current emotional state of the cow. This is randomly generated
+        at each call.
+
+        Returns
+        -------
+        Emotion
+            The emotion of the cow.
+        """
+        i = random.randint(0, len(list(Emotion)) - 1)
         return list(Emotion)[i]

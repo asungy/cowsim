@@ -128,3 +128,29 @@ class PurpleAngusTest:
     def test_emotion(self):
         angus = PurpleAngus.generate()
         assert isinstance(angus.emotion, Emotion)
+
+    def test_should_reproduce(self):
+        angus_a = PurpleAngus(
+            age=20 * 365,
+            sex=Sex.MALE,
+            calories=1000,
+            weight=1000,
+        )
+
+        angus_b = PurpleAngus(
+            age=25 * 365,
+            sex=Sex.MALE,
+            calories=1000,
+            weight=1000,
+        )
+
+        angus_c = PurpleAngus(
+            age=2 * 365,
+            sex=Sex.FEMALE,
+            calories=1000,
+            weight=1000,
+        )
+
+        assert not PurpleAngus.should_reproduce(angus_a, angus_a)
+        assert not PurpleAngus.should_reproduce(angus_a, angus_b)
+        assert not PurpleAngus.should_reproduce(angus_a, angus_c)
