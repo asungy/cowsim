@@ -183,6 +183,8 @@ class CowPen(Environment):
         None
         """
         for _ in range(self._max_steps):
+            LOG.info(f"Starting iteration {self._steps}")
+
             for key in self._entities.keys():
                 if len(self._entities[key]) == 0:
                     LOG.warning(
@@ -191,6 +193,7 @@ class CowPen(Environment):
                     return
 
             self.step()
+            LOG.info(f"Finishing iteration {self._steps}")
 
     def report(self, directory: str) -> None:
         """Produce report of simulation execution.
