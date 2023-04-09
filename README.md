@@ -72,3 +72,6 @@ To run a cow simulation with default values, simply run:
 ```bash
 cowsim run
 ```
+
+After running the simulation, a directory containing CSV data files will be
+produced (default: `data/`).
