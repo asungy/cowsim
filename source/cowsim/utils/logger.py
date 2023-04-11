@@ -4,9 +4,9 @@ from cowsim.utils.color import FORES, BRIGHTNESS, color_string
 
 class LogFormatter(logging.Formatter):
     # Set format
-    debug_format = "%(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
-    info_format = "%(levelname)s - %(message)s"
-    error_format = "%(levelname)s - %(message)s"
+    debug_format = "[%(asctime)s] %(levelname)-7s | %(filename)s:%(lineno)d | %(message)s"
+    info_format = "[%(asctime)s] %(levelname)-7s | %(message)s"
+    error_format = "[%(asctime)s] %(levelname)-7s | %(message)s"
     FORMATS = {
         logging.DEBUG: color_string(debug_format, FORES["green"], BRIGHTNESS["dim"]),
         logging.INFO: color_string(info_format, FORES["green"]),
@@ -17,7 +17,7 @@ class LogFormatter(logging.Formatter):
 
     def format(self, record):
         log_fmt = self.FORMATS.get(record.levelno)
-        formatter = logging.Formatter(log_fmt)
+        formatter = logging.Formatter(log_fmt, "%Y-%m-%d %H:%M:%S")
         return formatter.format(record)
 
 
