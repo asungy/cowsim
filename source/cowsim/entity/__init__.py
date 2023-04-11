@@ -1,6 +1,8 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from enum import Enum
 import uuid
+
+from cowsim.utils.named_abc import Named_ABC
 
 
 class Sex(Enum):
@@ -10,7 +12,7 @@ class Sex(Enum):
     FEMALE = 2
 
 
-class Entity(ABC):
+class Entity(Named_ABC):
     """Represents a general, living entity.
 
     Attributes
@@ -60,21 +62,6 @@ class Entity(ABC):
         """
         ...
 
-    @staticmethod
-    @abstractmethod
-    def name() -> str:
-        """Name of entity.
-
-        Parameters
-        ----------
-        none
-
-        Returns
-        -------
-        str
-            A name identifying this class.
-        """
-        ...
 
     @classmethod
     @abstractmethod
@@ -192,7 +179,7 @@ class Entity(ABC):
         self._weight = weight
 
     def __str__(self):
-        return f"{self.__class__.name()} [{str(self._id)[:8]}]"
+        return f"{self.__class__.name} [{str(self._id)[:8]}]"
 
     @property
     def id(self) -> uuid.UUID:

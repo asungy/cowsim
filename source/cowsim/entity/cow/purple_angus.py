@@ -30,21 +30,6 @@ class PurpleAngus(Cow):
     # Max bound on methane production (in kilograms)
     MAX_METHANE_PRODUCTION_BOUND = 300 * 2.2
 
-    @staticmethod
-    def name() -> str:
-        """String name of PurpleAngus class.
-
-        Parameters
-        ----------
-        none
-
-        Returns
-        -------
-        str
-            Name identifying class.
-        """
-        return "PurpleAngus"
-
     @classmethod
     def should_reproduce(cls, cow_a: Cow, cow_b: Cow) -> bool:
         """Determines if two cows should reproduce.

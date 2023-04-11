@@ -4,11 +4,11 @@ from cowsim.entity.cow.purple_angus import PurpleAngus
 DEFAULT_PURPLE_ANGUS_POPULATION = 10
 
 ENVIRONMENT_MAP = {
-    CowPen.name(): CowPen,
+    CowPen.name: CowPen,
 }
 
 ENTITY_MAP = {
-    PurpleAngus.name(): PurpleAngus,
+    PurpleAngus.name: PurpleAngus,
 }
 
 
@@ -20,7 +20,7 @@ def run(
     steps: int,
 ) -> None:
     if environment is None:
-        environment = CowPen.name()
+        environment = CowPen.name
 
     entity_list = []
     for entity in entities:
@@ -28,7 +28,7 @@ def run(
     entities = entity_list
 
     if len(entities) == 0:
-        entities.append((PurpleAngus.name(), DEFAULT_PURPLE_ANGUS_POPULATION))
+        entities.append((PurpleAngus.name, DEFAULT_PURPLE_ANGUS_POPULATION))
 
     env_cls = ENVIRONMENT_MAP[environment]
     entities = [(ENTITY_MAP[entity[0]], entity[1]) for entity in entities]

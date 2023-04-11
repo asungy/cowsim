@@ -11,8 +11,8 @@ class CowPenTest:
         """Test CowPen constructor."""
         quantity = 4
         environment = CowPen([(PurpleAngus, quantity)])
-        assert PurpleAngus.name() in environment._entities
-        assert len(environment._entities[PurpleAngus.name()]) == quantity
+        assert PurpleAngus.name in environment._entities
+        assert len(environment._entities[PurpleAngus.name]) == quantity
 
     def test_feeding_phase(self):
         """Test the feeding phase."""
@@ -20,14 +20,14 @@ class CowPenTest:
         environment = CowPen([(PurpleAngus, quantity)])
 
         # Asserting empty data in the first row.
-        for id in environment._feeding_data[PurpleAngus.name()]:
-            assert environment._feeding_data[PurpleAngus.name()][id][0] is np.nan
+        for id in environment._feeding_data[PurpleAngus.name]:
+            assert environment._feeding_data[PurpleAngus.name][id][0] is np.nan
 
         environment._feeding_phase()
 
         # Assert row is propagated.
-        for id in environment._feeding_data[PurpleAngus.name()]:
-            assert environment._feeding_data[PurpleAngus.name()][id][0] is not None
+        for id in environment._feeding_data[PurpleAngus.name]:
+            assert environment._feeding_data[PurpleAngus.name][id][0] is not None
 
     def test_step(self):
         """Test the step method"""

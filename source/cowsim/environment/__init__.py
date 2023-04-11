@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
 from ..entity import Entity
 
+from cowsim.utils.named_abc import Named_ABC
 
-class Environment(ABC):
+
+class Environment(Named_ABC):
     """Represents the environment for the simulation.
 
     Attributes
@@ -21,22 +23,6 @@ class Environment(ABC):
     _steps : int
         Number of steps that have elapsed.
     """
-
-    @staticmethod
-    @abstractmethod
-    def name() -> str:
-        """Name of environment.
-
-        Parameters
-        ----------
-        none
-
-        Returns
-        -------
-        str
-            A name identifying this class.
-        """
-        ...
 
     def __init__(
         self,
@@ -101,7 +87,7 @@ class Environment(ABC):
         ...
 
 
-class Feed(ABC):
+class Feed(Named_ABC):
     """Abstract class for entity feed.
 
     Derived classes of Feed should be expected to be provided to a derived
@@ -113,22 +99,6 @@ class Feed(ABC):
     ----------
 
     """
-
-    @staticmethod
-    @abstractmethod
-    def name() -> str:
-        """Name of feed.
-
-        Parameters
-        ----------
-        none
-
-        Returns
-        -------
-        str
-            A name identifying this class.
-        """
-        ...
 
     @property
     @abstractmethod
