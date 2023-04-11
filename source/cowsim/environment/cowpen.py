@@ -52,7 +52,7 @@ class CowPen(Environment):
         str
             A name identifying this class.
         """
-        return "Cow Pen"
+        return "CowPen"
 
     def __init__(
         self,
@@ -468,7 +468,7 @@ class OrangeGrass(Feed):
         str
             A name identifying this class.
         """
-        return "Orange Grass"
+        return "OrangeGrass"
 
     @property
     def initial_serving_total(self) -> int:

@@ -43,7 +43,7 @@ class PurpleAngus(Cow):
         str
             Name identifying class.
         """
-        return "Purple Angus"
+        return "PurpleAngus"
 
     @classmethod
     def should_reproduce(cls, cow_a: Cow, cow_b: Cow) -> bool:
