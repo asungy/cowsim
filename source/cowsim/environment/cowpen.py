@@ -39,21 +39,6 @@ class CowPen(Environment):
     DEFAULT_MAX_CAPACITY = 100
     DEFAULT_STEPS = 365
 
-    @staticmethod
-    def name() -> str:
-        """Name of environment.
-
-        Parameters
-        ----------
-        none
-
-        Returns
-        -------
-        str
-            A name identifying this class.
-        """
-        return "Cow Pen"
-
     def __init__(
         self,
         entities: [(Type[Cow], int)],
@@ -95,10 +80,10 @@ class CowPen(Environment):
             entity = tup[0]
             quantity = tup[1]
             entity_list = [entity.generate() for _ in range(quantity)]
-            if entity.name() not in self._entities:
-                self._entities[entity.name()] = []
+            if entity.name not in self._entities:
+                self._entities[entity.name] = []
 
-            self._entities[entity.name()] += entity_list
+            self._entities[entity.name] += entity_list
 
         self._feeding_data = {}
         for key in self._entities.keys():
@@ -257,7 +242,7 @@ class CowPen(Environment):
             for entity in entity_list:
                 servings = feed.feed(entity)
                 # Log feeding data
-                self._feeding_data[entity.__class__.name()][entity.id].iloc[
+                self._feeding_data[entity.__class__.name][entity.id].iloc[
                     self._steps
                 ] = servings
 
@@ -280,45 +265,45 @@ class CowPen(Environment):
                         self._entities[key].append(new_entity)
 
                         # Add column to feeding dataframe.
-                        df = self._feeding_data[new_entity.__class__.name()]
+                        df = self._feeding_data[new_entity.__class__.name]
                         new_col = pd.DataFrame(
                             columns=[new_entity.id],
                             index=[x for x in range(self._max_steps)],
                         )
-                        self._feeding_data[new_entity.__class__.name()] = pd.concat(
+                        self._feeding_data[new_entity.__class__.name] = pd.concat(
                             (df, new_col),
                             axis=1,
                         )
 
                         # Add column to milk dataframe
-                        df = self._milk_data[new_entity.__class__.name()]
+                        df = self._milk_data[new_entity.__class__.name]
                         new_col = pd.DataFrame(
                             columns=[new_entity.id],
                             index=[x for x in range(self._max_steps)],
                         )
-                        self._milk_data[new_entity.__class__.name()] = pd.concat(
+                        self._milk_data[new_entity.__class__.name] = pd.concat(
                             (df, new_col),
                             axis=1,
                         )
 
                         # Add column to methane dataframe
-                        df = self._methane_data[new_entity.__class__.name()]
+                        df = self._methane_data[new_entity.__class__.name]
                         new_col = pd.DataFrame(
                             columns=[new_entity.id],
                             index=[x for x in range(self._max_steps)],
                         )
-                        self._methane_data[new_entity.__class__.name()] = pd.concat(
+                        self._methane_data[new_entity.__class__.name] = pd.concat(
                             (df, new_col),
                             axis=1,
                         )
 
                         # Add column to weight dataframe.
-                        df = self._entity_data[new_entity.__class__.name()]
+                        df = self._entity_data[new_entity.__class__.name]
                         new_col = pd.DataFrame(
                             columns=[new_entity.id],
                             index=[x for x in range(self._max_steps)],
                         )
-                        self._entity_data[new_entity.__class__.name()] = pd.concat(
+                        self._entity_data[new_entity.__class__.name] = pd.concat(
                             (df, new_col),
                             axis=1,
                         )
@@ -406,7 +391,7 @@ class CowPen(Environment):
         for key in self._entities.keys():
             for entity in self._entities[key]:
                 milk_produced = entity.milk_production()
-                self._milk_data[entity.__class__.name()][entity.id].iloc[
+                self._milk_data[entity.__class__.name][entity.id].iloc[
                     self._steps
                 ] = milk_produced
 
@@ -424,7 +409,7 @@ class CowPen(Environment):
         for key in self._entities.keys():
             for entity in self._entities[key]:
                 methane_produced = entity.methane_production()
-                self._methane_data[entity.__class__.name()][entity.id].iloc[
+                self._methane_data[entity.__class__.name][entity.id].iloc[
                     self._steps
                 ] = methane_produced
 
@@ -454,21 +439,6 @@ class OrangeGrass(Feed):
         self._total_entity_calories = 0
         for cow in cow_list:
             self._total_entity_calories += cow.calories
-
-    @staticmethod
-    def name() -> str:
-        """Name of feed.
-
-        Parameters
-        ----------
-        none
-
-        Returns
-        -------
-        str
-            A name identifying this class.
-        """
-        return "Orange Grass"
 
     @property
     def initial_serving_total(self) -> int:
