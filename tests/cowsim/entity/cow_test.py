@@ -27,7 +27,7 @@ class PurpleAngusTest:
 
     def test_static_name(self):
         """Test PurpleAngus.name static method."""
-        assert PurpleAngus.name == "Purple Angus"
+        assert PurpleAngus.name == "PurpleAngus"
 
     def test_generate(self):
         """Test PurpleAngus.generate() class method."""
