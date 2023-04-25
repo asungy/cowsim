@@ -3,8 +3,8 @@ from cowsim import engine
 from cowsim.entity.cow.purple_angus import PurpleAngus
 from cowsim.environment.cowpen import CowPen
 
-ENVIRONMENT_CHOICES = [CowPen.name()]
-ENTITY_CHOICES = [PurpleAngus.name()]
+ENVIRONMENT_CHOICES = [CowPen.name]
+ENTITY_CHOICES = [PurpleAngus.name]
 
 
 @click.command()

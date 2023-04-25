@@ -26,8 +26,8 @@ class PurpleAngusTest:
         assert p_angus.weight == weight
 
     def test_static_name(self):
-        """Test PurpleAngus.name() static method."""
-        assert PurpleAngus.name() == "Purple Angus"
+        """Test PurpleAngus.name static method."""
+        assert PurpleAngus.name == "PurpleAngus"
 
     def test_generate(self):
         """Test PurpleAngus.generate() class method."""
