@@ -89,33 +89,33 @@ class CowPen(Environment):
         for key in self._entities.keys():
             self._feeding_data[key] = pd.DataFrame(
                 columns=[cow.id for cow in self._entities[key]],
-                index=[x for x in range(self._max_steps)],
+                index=pd.Index([x for x in range(self._max_steps)], name="Step"),
             )
 
         self._milk_data = {}
         for key in self._entities.keys():
             self._milk_data[key] = pd.DataFrame(
                 columns=[cow.id for cow in self._entities[key]],
-                index=[x for x in range(self._max_steps)],
+                index=pd.Index([x for x in range(self._max_steps)], name="Step"),
             )
 
         self._methane_data = {}
         for key in self._entities.keys():
             self._methane_data[key] = pd.DataFrame(
                 columns=[cow.id for cow in self._entities[key]],
-                index=[x for x in range(self._max_steps)],
+                index=pd.Index([x for x in range(self._max_steps)], name="Step"),
             )
 
         self._population_data = pd.DataFrame(
             columns=[key for key in self._entities.keys()],
-            index=[x for x in range(self._max_steps)],
+            index=pd.Index([x for x in range(self._max_steps)], name="Step"),
         )
 
         self._entity_data = {}
         for key in self._entities.keys():
             self._entity_data[key] = pd.DataFrame(
                 columns=[cow.id for cow in self._entities[key]],
-                index=[x for x in range(self._max_steps)],
+                index=pd.Index([x for x in range(self._max_steps)], name="Step"),
             )
 
     def step(self) -> None:
@@ -268,7 +268,7 @@ class CowPen(Environment):
                         df = self._feeding_data[new_entity.__class__.name]
                         new_col = pd.DataFrame(
                             columns=[new_entity.id],
-                            index=[x for x in range(self._max_steps)],
+                            index=pd.Index([x for x in range(self._max_steps)], name="Step"),
                         )
                         self._feeding_data[new_entity.__class__.name] = pd.concat(
                             (df, new_col),
@@ -279,7 +279,7 @@ class CowPen(Environment):
                         df = self._milk_data[new_entity.__class__.name]
                         new_col = pd.DataFrame(
                             columns=[new_entity.id],
-                            index=[x for x in range(self._max_steps)],
+                            index=pd.Index([x for x in range(self._max_steps)], name="Step"),
                         )
                         self._milk_data[new_entity.__class__.name] = pd.concat(
                             (df, new_col),
@@ -290,7 +290,7 @@ class CowPen(Environment):
                         df = self._methane_data[new_entity.__class__.name]
                         new_col = pd.DataFrame(
                             columns=[new_entity.id],
-                            index=[x for x in range(self._max_steps)],
+                            index=pd.Index([x for x in range(self._max_steps)], name="Step"),
                         )
                         self._methane_data[new_entity.__class__.name] = pd.concat(
                             (df, new_col),
@@ -301,7 +301,7 @@ class CowPen(Environment):
                         df = self._entity_data[new_entity.__class__.name]
                         new_col = pd.DataFrame(
                             columns=[new_entity.id],
-                            index=[x for x in range(self._max_steps)],
+                            index=pd.Index([x for x in range(self._max_steps)], name="Step"),
                         )
                         self._entity_data[new_entity.__class__.name] = pd.concat(
                             (df, new_col),
